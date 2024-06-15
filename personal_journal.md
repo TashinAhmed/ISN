@@ -55,9 +55,13 @@
 3. prepare valid/eval code
 4. 
 
-
 ### CAN BE DONE
-
 
 1. in code - arg parser generation for the arguments [done]
 2. datasert_generator code is meant for running one time. it can be run multiple time as well but it will going to replace previous data. It's not handled to append instead of replace
+3. multiple callbacks can be used, used one for now.
+4. optuna for automated hyperparam optmization
+5. wandb to track the outcomes
+6. docekrize the source control
+7. poetry related queries
+8. random shuffle not done in first part of holding and experiment creation

@@ -1,1 +1,6 @@
-/data
+/data/preprocessed/experiment
+/data/preprocessed/holding
+/data/raw
+/pdfs
+
+*.png
