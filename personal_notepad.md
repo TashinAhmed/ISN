@@ -12,12 +12,13 @@
 
 ### DATASET CREATION
 
-1. img sz 224x224x3
-2. rand rect, ellips
-3. wxh betn 20-40 px
-4. 3 different colors shapes
-5. multi (different) shapes can share same color
-6. acc doesnt matter, matter most is insights, coding struct and above FOCUS
+1. [X] img sz 224x224x3
+2. [X] rand rect, ellips
+3. [X] wxh betn 20-40 px
+4. [X] 3 different colors shapes
+5. [X] multi (different) shapes can share same color
+6. [ ] show tiled format dataset
+7. [ ] acc doesnt matter, matter most is insights, coding struct and above FOCUS
 
 ### IMPLEMENT ISN
 
@@ -52,4 +53,11 @@
    8. final prep dataset
 2. prepare training code
 3. prepare valid/eval code
-4.
+4. 
+
+
+### CAN BE DONE
+
+
+1. in code - arg parser generation for the arguments [done]
+2. datasert_generator code is meant for running one time. it can be run multiple time as well but it will going to replace previous data. It's not handled to append instead of replace

@@ -1,11 +1,13 @@
-import numpy as np
-from PIL import Image, ImageDraw
-import random
+"""Image and corresponding mask generation"""
 
-img_height = 224
-img_width = 224
-min_shape_px = 20
-max_shape_px = 40
+import random
+from PIL import Image, ImageDraw
+
+
+IMG_HEIGHT = 224
+IMG_WIDTH = 224
+MIN_SHAPE_PX = 20
+MAX_SHAPE_PX = 40
 
 def random_color():
     """Generate a random color from RGB."""
@@ -14,12 +16,13 @@ def random_color():
 
 def random_point():
     """Generate a random point within the image dimensions."""
-    return random.randint(0, img_height-1), random.randint(0, img_width-1)
+    return random.randint(0, IMG_HEIGHT-1), random.randint(0, IMG_WIDTH-1)
 
 def random_size():
-    """Generate a random size between min_shape_px and max_shape_px pixels for both width and height."""
-    width = random.randint(min_shape_px, max_shape_px)
-    height = random.randint(min_shape_px, max_shape_px)
+    """Generate a random size between min_shape_px and 
+    max_shape_px pixels for both width and height."""
+    width = random.randint(MIN_SHAPE_PX, MAX_SHAPE_PX)
+    height = random.randint(MIN_SHAPE_PX, MAX_SHAPE_PX)
     return width, height
 
 def draw_random_shape(draw, mask_draw):
@@ -33,7 +36,7 @@ def draw_random_shape(draw, mask_draw):
         width, height = random_size()
         x2 = x1 + width
         y2 = y1 + height
-        if x2 <= img_height and y2 <= img_width:
+        if x2 <= IMG_HEIGHT and y2 <= IMG_WIDTH:
             break
 
     if shape_type == 'ellipse':
@@ -45,11 +48,11 @@ def draw_random_shape(draw, mask_draw):
 def create_image_and_mask_with_random_shapes():
     """Create an image of size img_width x img_width with random ellipses and rectangles,
        and a mask for rectangles only."""
-    
-    image = Image.new('RGB', (img_height, img_width), 'white')
+        
+    image = Image.new('RGB', (IMG_HEIGHT, IMG_WIDTH), 'white')
     draw = ImageDraw.Draw(image)
     
-    mask = Image.new('L', (img_height, img_width), 'black')
+    mask = Image.new('L', (IMG_HEIGHT, IMG_WIDTH), 'black')
     mask_draw = ImageDraw.Draw(mask)
 
     # min 5 max 10 shapes     
