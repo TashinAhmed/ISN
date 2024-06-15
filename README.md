@@ -31,6 +31,7 @@ ISN/
 │   ├── raw
 │   └── preprocessed/
 │       ├── metadata.csv
+│       ├── class_dict.csv
 │       ├── experiment/
 │       │   ├── 1_image.png
 │       │   ├── 1_mask.png
