@@ -10,6 +10,7 @@ import argparse
 import random
 import os
 from PIL import Image, ImageDraw
+from tqdm import tqdm
 
 
 class ShapeImageGenerator:
@@ -23,8 +24,8 @@ class ShapeImageGenerator:
         min_shape_px=20,
         max_shape_px=40,
         num_images=100,
-        image_dir="data/images",
-        mask_dir="data/masks",
+        image_dir="data/raw/images",
+        mask_dir="data/raw/masks",
     ):
         self.img_height = img_height
         self.img_width = img_width
@@ -94,7 +95,7 @@ class ShapeImageGenerator:
     def generate_and_save_images_and_masks(self):
         """Generate and save N images and masks
         with specified configurations."""
-        for i in range(1, self.num_images + 1):
+        for i in tqdm(range(1, self.num_images + 1)):
             image, mask = self.create_image_and_mask_with_random_shapes()
             image_path = os.path.join(self.image_dir, f"{i}_image.png")
             mask_path = os.path.join(self.mask_dir, f"{i}_mask.png")
@@ -102,7 +103,7 @@ class ShapeImageGenerator:
             image.save(image_path)
             mask.save(mask_path)
 
-            print(f"Saved {image_path} and {mask_path}")
+            # print(f"Saved {image_path} and {mask_path}")
 
 
 def main():
@@ -124,18 +125,18 @@ def main():
         "--max_shape_px", type=int, default=40, help="Maximum size of the shapes."
     )
     parser.add_argument(
-        "--num_images", type=int, default=100, help="Number of images to generate."
+        "--num_images", type=int, default=1000, help="Number of images to generate."
     )
     parser.add_argument(
         "--image_dir",
         type=str,
-        default="data/images",
+        default="data/raw/images",
         help="Directory to save generated images.",
     )
     parser.add_argument(
         "--mask_dir",
         type=str,
-        default="data/masks",
+        default="data/raw/masks",
         help="Directory to save generated masks.",
     )
 
