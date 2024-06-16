@@ -1,10 +1,24 @@
-"""Your code has been rated at 9.86/10 (previous run: 8.99/10, +0.87)
-    default values:
-    img_height and width 224,
-    min and max shapes 20-40
-    num_images=100,
-    image_dir=dataset/images,
-    mask_dir=dataset/masks"""
+#!/usr/bin/env python3  
+# -*- coding: utf-8 -*- 
+# ----------------------------------------------------------------------------
+# Created By   : Tashin Ahmed
+# Created Date : "15/06/2024"
+# email        : tashinahmed.contact@gmail.com
+# copyright    : MIT License Copyright (c) 2024 Tashin Ahmed   
+# version      : "0.0.1"
+# status       : "PoC"
+# ----------------------------------------------------------------------------
+
+"""
+ShapeImageGenerator class for generating random shape images and masks,
+and main function to execute the generator with command-line arguments.
+
+Your code has been rated at 9.86/10 (previous run: 8.99/10, +0.87)
+   
+Generates random shape images and masks based on provided configurations.
+
+"""
+
 
 import argparse
 import random
@@ -14,8 +28,19 @@ from tqdm import tqdm
 
 
 class ShapeImageGenerator:
-    """5-10 numbers of shape generation for N numbers of
-    images and masks generator"""
+    """
+    5-10 numbers of shape generation for N numbers of
+    images and masks generator
+    
+    Attributes:
+    - img_height (int): Height of the generated images.
+    - img_width (int): Width of the generated images.
+    - min_shape_px (int): Minimum size of the shapes.
+    - max_shape_px (int): Maximum size of the shapes.
+    - num_images (int): Number of images to generate.
+    - image_dir (str): Directory to save generated images.
+    - mask_dir (str): Directory to save generated masks.
+    """
 
     def __init__(
         self,

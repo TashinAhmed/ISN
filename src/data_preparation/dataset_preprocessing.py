@@ -1,3 +1,14 @@
+#!/usr/bin/env python3  
+# -*- coding: utf-8 -*- 
+# ----------------------------------------------------------------------------
+# Created By   : Tashin Ahmed
+# Created Date : "15/06/2024"
+# email        : tashinahmed.contact@gmail.com
+# copyright    : MIT License Copyright (c) 2024 Tashin Ahmed   
+# version      : "0.0.1"
+# status       : "PoC"
+# ----------------------------------------------------------------------------
+
 import os
 import shutil
 from tqdm import tqdm
@@ -5,6 +16,22 @@ import argparse
 
 
 class DatasetPreProcessor:
+    """
+    Class to preprocess a dataset by splitting it into experiment and holding sets.
+
+    Attributes:
+    - data_dir (str): Path to the root data directory containing 'images' and 'masks' subdirectories.
+    - experiment_dir (str): Path to save experiment dataset (default: 'data/preprocessed/experiment').
+    - holding_dir (str): Path to save holding dataset (default: 'data/preprocessed/holding').
+    - holding_images_dir (str): Path to holding images directory within holding_dir.
+    - holding_masks_dir (str): Path to holding masks directory within holding_dir.
+     
+     Args:
+    - data_dir (str): Path to the root data directory containing 'images' and 'masks' subdirectories.
+    - experiment_dir (str): Path to save experiment dataset (default: 'data/preprocessed/experiment').
+    - holding_dir (str): Path to save holding dataset (default: 'data/preprocessed/holding').
+
+    """
     def __init__(self, data_dir, experiment_dir, holding_dir):
         self.data_dir = data_dir
         self.experiment_dir = experiment_dir
@@ -19,7 +46,6 @@ class DatasetPreProcessor:
 
         images_dir = os.path.join(self.data_dir, "images")
         masks_dir = os.path.join(self.data_dir, "masks")
-
 
         image_files = sorted(os.listdir(images_dir))
         mask_files = sorted(os.listdir(masks_dir))
