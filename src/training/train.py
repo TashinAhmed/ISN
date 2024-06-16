@@ -11,6 +11,7 @@ from src.models.segmentation_model import SegmentationModel
 from src.data.datamodule import ISNDataModule
 from src.data.data_preprocessing import load_metadata, split_data, load_class_info
 from src.config import *
+from src.utils.checkpoint_utils import get_next_checkpoint_filename
 
 
 def train():
@@ -24,8 +25,17 @@ def train():
     early_stop_callback = EarlyStopping(
         monitor="valid_loss", min_delta=0.00001, patience=5, mode="min"
     )
+    # checkpoint_callback = ModelCheckpoint(
+    #     every_n_epochs=1, dirpath=OUTPUT_DIR, filename="lightning_trained"
+    # )
+    checkpoint_filename = get_next_checkpoint_filename(CHECKPOINT_DIR, "lightning_trained")
     checkpoint_callback = ModelCheckpoint(
-        every_n_epochs=1, dirpath=OUTPUT_DIR, filename="lightning_trained"
+        dirpath=CHECKPOINT_DIR,
+        filename=checkpoint_filename[:-5],  
+        every_n_epochs=1,
+        save_top_k=1,  
+        monitor="valid_loss",  
+        mode="min"
     )
     logger = CSVLogger(OUTPUT_DIR, name="lightning_logs")
 
@@ -51,10 +61,13 @@ def train():
         class_rgb_values,
     )
 
-    checkpoint_file = os.path.join(CHECKPOINT_DIR, "lightning_trained-v1.ckpt")
-    if os.path.isfile(checkpoint_file):
+    # checkpoint_file = os.path.join(CHECKPOINT_DIR, "lightning_trained-v1.ckpt")
+    # if os.path.isfile(checkpoint_file):
+    #     print("Resuming training from previous checkpoint...")
+    #     trainer.fit(segmodel, datamodule=isn_data, ckpt_path=checkpoint_file)
+    if os.path.isfile(os.path.join(CHECKPOINT_DIR, checkpoint_filename)):
         print("Resuming training from previous checkpoint...")
-        trainer.fit(segmodel, datamodule=isn_data, ckpt_path=checkpoint_file)
+        trainer.fit(segmodel, datamodule=isn_data, ckpt_path=checkpoint_filename)
     else:
         print("Starting training from scratch...")
         trainer.fit(segmodel, datamodule=isn_data)
