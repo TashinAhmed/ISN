@@ -1,6 +1,10 @@
 /data/preprocessed/experiment
 /data/preprocessed/holding
+
 /data/raw
-/pdfs
+/docs
+
+/working
 
 *.png
+*.ckpt

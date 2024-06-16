@@ -3,7 +3,6 @@ import matplotlib.image as mpimg
 import numpy as np
 import os
 
-# Function to load images from a directory
 def load_images_from_dir(directory):
     images = []
     for filename in sorted(os.listdir(directory)):
@@ -12,15 +11,13 @@ def load_images_from_dir(directory):
             images.append(img)
     return images
 
-# Function to load images and masks from their respective directories
 def load_images_and_masks(images_dir, masks_dir):
     images = load_images_from_dir(images_dir)
     masks = load_images_from_dir(masks_dir)
     return images, masks
 
-# Function to plot images and masks in rows and save as one figure
 def plot_and_save_combined_images(images, masks, save_filename):
-    num_images = min(len(images), 10)  # Limit to first 10 images
+    num_images = min(len(images), 10)  
     fig, axs = plt.subplots(2, num_images, figsize=(15, 5))
     
     for i in range(num_images):
@@ -36,15 +33,10 @@ def plot_and_save_combined_images(images, masks, save_filename):
     plt.savefig(save_filename)
     plt.show()
 
-# Directory paths where images and masks are stored
 images_dir = 'data/images'
 masks_dir = 'data/masks'
 
-# Load images and masks
 images, masks = load_images_and_masks(images_dir, masks_dir)
 
-# Filename to save combined image and masks
 save_filename = 'assets/dataset'
-
-# Display and save the first 10 images and their masks as one figure
 plot_and_save_combined_images(images, masks, save_filename)

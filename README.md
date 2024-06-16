@@ -4,7 +4,7 @@ Just another PoC on Image Segmentation Network on dummy dataset
 
 ### Instructions:
 
-Run ``python data/dataset_generator.py``(9.86 rating on pylint) from the parent directory. The script will generate data (images and masks) under the parent directory named as ``data``. Structure of the ``data`` directory is,
+1. Run ``python src/data/dataset_generator.py``(9.86 rating on pylint) from the parent directory. The script will generate data (images and masks) under the parent directory named as ``data``. Structure of the ``data`` directory is,
 
 ```
 ISN/
@@ -20,10 +20,11 @@ ISN/
 │   │       └── ...
 ```
 
-argparser available thus the default arguments can be updated: ``python data/dataset_generator.py --img_height 256 --img_width 256 --min_shape_px 30 --max_shape_px 50 --num_images 100 --image_dir 'output/images' --mask_dir 'data/masks'``
+2. argparser available thus the default arguments can be updated: ``python src/data/dataset_generator.py --img_height 256 --img_width 256 --min_shape_px 30 --max_shape_px 50 --num_images 100 --image_dir 'output/images' --mask_dir 'data/masks'``
 
-After processing dataset by running ``python data/dataset_prepocessing.py``
+After processing dataset by running ``python src/data/dataset_prepocessing.py``
 
+To create the ``metadata.csv`` run  ``python src/data/metadata_generator.py``
 
 ```
 ISN/
