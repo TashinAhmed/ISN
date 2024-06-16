@@ -1,3 +1,14 @@
+#!/usr/bin/env python3  
+# -*- coding: utf-8 -*- 
+# ----------------------------------------------------------------------------
+# Created By   : Tashin Ahmed
+# Created Date : "16/06/2024"
+# email        : tashinahmed.contact@gmail.com
+# copyright    : MIT License Copyright (c) 2024 Tashin Ahmed   
+# version      : "0.0.1"
+# status       : "PoC"
+# ----------------------------------------------------------------------------
+
 import pytorch_lightning as pl
 from torch.utils.data import DataLoader
 from torchvision import transforms
@@ -7,6 +18,24 @@ from src.config import WORKERS
 
 
 class ISNDataModule(pl.LightningDataModule):
+    """
+    LightningDataModule for ISN dataset.
+
+    This module handles loading and preprocessing of ISN dataset for training,
+    validation, and testing using PyTorch Lightning DataLoader.
+     
+    Initializes ISNDataModule with dataset information and parameters.
+
+    Args:
+    - train_df (pd.DataFrame): DataFrame containing training set metadata.
+    - valid_df (pd.DataFrame): DataFrame containing validation set metadata.
+    - test_df (pd.DataFrame): DataFrame containing test set metadata.
+    - batch_size (int): Batch size for DataLoader (default: 2).
+    - img_size (tuple): Tuple specifying image size (default: (256, 256)).
+    - preprocess_fn (callable): Preprocessing function for input images (default: None).
+    - class_rgb_values (list): List of RGB values for dataset classes (default: None).
+        
+    """
     def __init__(
         self,
         train_df,
@@ -33,6 +62,12 @@ class ISNDataModule(pl.LightningDataModule):
         self.class_rgb_values = class_rgb_values
 
     def setup(self, stage=None):
+        """
+        Setup datasets for training, validation, and testing.
+
+        Args:
+        - stage (str): Stage of setup ('fit' for training, 'test' for testing).
+        """
         self.trainset = ISNSet(
             self.train_df,
             transform=self.transform,

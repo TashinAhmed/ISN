@@ -1,3 +1,48 @@
+#!/usr/bin/env python3  
+# -*- coding: utf-8 -*- 
+# ----------------------------------------------------------------------------
+# Created By   : Tashin Ahmed
+# Created Date : "16/06/2024"
+# email        : tashinahmed.contact@gmail.com
+# copyright    : MIT License Copyright (c) 2024 Tashin Ahmed   
+# version      : "0.0.1"
+# status       : "PoC"
+# ----------------------------------------------------------------------------
+
+"""
+Training script for training a segmentation model using PyTorch Lightning.
+
+This script:
+1. Loads metadata and prepares training, validation, and test datasets.
+2. Creates a UNet model using segmentation_models_pytorch library.
+3. Defines loss function, early stopping callback, checkpoint callback, and logger.
+4. Initializes PyTorch Lightning Trainer and performs training of the segmentation model.
+
+Imports:
+- os: Provides functionalities for interacting with the operating system.
+- pytorch_lightning as pl: Imports PyTorch Lightning for training and callbacks.
+- pytorch_lightning.callbacks: Imports EarlyStopping and ModelCheckpoint callbacks.
+- pytorch_lightning.loggers: Imports CSVLogger for logging training metrics.
+- segmentation_models_pytorch as smp: Imports the segmentation model library.
+- torch.nn: Imports neural network modules from PyTorch.
+- src.models.unet_model.create_unet_model: Imports function to create a UNet model.
+- src.models.segmentation_model.SegmentationModel: Imports SegmentationModel class for training.
+- src.data.datamodule.ISNDataModule: Imports data module for preparing datasets.
+- src.data.data_preprocessing: Imports functions for loading metadata and class information.
+- src.config: Imports configuration variables for the experiment.
+- src.utils.checkpoint_utils.get_next_checkpoint_filename: Imports function to generate next checkpoint filename.
+
+Functions:
+- train(): Performs training of the segmentation model.
+- main(): Entry point of the script.
+
+Usage:
+- Run this script to train a segmentation model using PyTorch Lightning.
+
+Exceptions:
+- None handled directly within the script, but could raise exceptions related to file operations or data loading.
+"""
+
 import os
 
 import pytorch_lightning as pl

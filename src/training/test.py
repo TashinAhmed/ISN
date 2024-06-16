@@ -1,3 +1,46 @@
+#!/usr/bin/env python3  
+# -*- coding: utf-8 -*- 
+# ----------------------------------------------------------------------------
+# Created By   : Tashin Ahmed
+# Created Date : "16/06/2024"
+# email        : tashinahmed.contact@gmail.com
+# copyright    : MIT License Copyright (c) 2024 Tashin Ahmed   
+# version      : "0.0.1"
+# status       : "PoC"
+# ----------------------------------------------------------------------------
+
+"""
+Test script for evaluating a segmentation model using a test dataset and a saved checkpoint.
+
+This script:
+1. Loads metadata and prepares test dataset.
+2. Creates a UNet model using segmentation_models_pytorch library.
+3. Loads the latest checkpoint of a SegmentationModel.
+4. Performs testing of the loaded model on the test dataset.
+
+Imports:
+- os: Provides functionalities for interacting with the operating system.
+- segmentation_models_pytorch as smp: Imports the segmentation model library.
+- torch.nn: Imports neural network modules from PyTorch.
+- pytorch_lightning as pl: Imports PyTorch Lightning for training and testing.
+- src.models.unet_model.create_unet_model: Imports function to create a UNet model.
+- src.models.segmentation_model.SegmentationModel: Imports SegmentationModel class for loading checkpoints.
+- src.data.datamodule.ISNDataModule: Imports data module for preparing dataset.
+- src.data.data_preprocessing: Imports functions for loading metadata and class information.
+- src.config: Imports configuration variables for the experiment.
+- src.utils.checkpoint_utils.get_latest_checkpoint: Imports function to get the latest checkpoint file.
+
+Functions:
+- test(): Performs testing of the segmentation model.
+- main(): Entry point of the script.
+
+Usage:
+- Run this script to evaluate a segmentation model on the test dataset using the latest checkpoint.
+
+Exceptions:
+- FileNotFoundError: Raised if no checkpoint file is found in the specified directory.
+"""
+
 import os
 
 import segmentation_models_pytorch as smp
