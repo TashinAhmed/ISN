@@ -1,8 +1,8 @@
-1. [ ] Train and evaluate only
-2. [ ] prepare a readme.md for code initiate instructions A-Z
+1. [X] Train and evaluate only
+2. [X] prepare a readme.md for code initiate instructions A-Z
 3. [ ] prepare pyproject.toml + poetry .lock file (no previous knowledge on this have to study a bit)
-4. [ ] else, requirements.txt will do (have knowledge on this)
-5. [ ] jupyter notebooks for visualization and ~~evaluation~~ only.
+4. [X] else, requirements.txt will do (have knowledge on this)
+5. [X] jupyter notebooks for visualization and ~~evaluation~~ only.
 
 ### FOCUS
 
@@ -17,28 +17,27 @@
 3. [X] wxh betn 20-40 px
 4. [X] 3 different colors shapes
 5. [X] multi (different) shapes can share same color
-6. [ ] show tiled format dataset
-7. [ ] acc doesnt matter, matter most is insights, coding struct and above FOCUS
+6. [X] show tiled format dataset
+7. [X] acc doesnt matter, matter most is insights, coding struct and above FOCUS
 
 ### IMPLEMENT ISN
 
-1. python
-2. torch
-3. OpenCV, Pillow
-4. segment only rects
-5. train
-6. evaluate
-7. readme
-8. github
+1. [X] python
+2. [X] torch (used lightning)
+3. [X] OpenCV, Pillow
+4. [X] segment only rects
+5. [X] train
+6. [X] evaluate
+7. [X] readme
+8. [X] github
 
 ### PRESENTATION
 
-1. 30-50 mins presentation, discussion, Q&A
-2. discuss challenges and solutions
-3. discuss potential improvements
-4. occlusion (have to prep data with occlusion as well)
-5. comment results on occlusions
-6. with code remove them from dataset, if so, how did that. (I believe delete them considering noisy data !!!)
+1. [X] discuss challenges and solutions
+3. [X] discuss potential improvements
+4. [X] occlusion (have to prep data with occlusion as well)
+5. [X] comment results on occlusions
+6. [X] with code remove them from dataset, if so, how did that. (I believe delete them considering noisy data !!!)
 
 ### PROCESS
 
@@ -57,8 +56,8 @@
 
 ### CAN BE DONE
 
-1. in code - arg parser generation for the arguments [done]
-2. datasert_generator code is meant for running one time. it can be run multiple time as well but it will going to replace previous data. It's not handled to append instead of replace
+1. in code - arg parser generation for the arguments [half done]
+2. dataset_generator code is meant for running one time. it can be run multiple time as well but it will going to replace previous data. It's not handled to append instead of replace
 3. multiple callbacks can be used, used one for now.
 4. optuna for automated hyperparam optmization
 5. wandb to track the outcomes

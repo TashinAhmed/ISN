@@ -6,10 +6,12 @@
 # email        : tashinahmed.contact@gmail.com
 # copyright    : MIT License Copyright (c) 2024 Tashin Ahmed   
 # version      : "0.0.1"
-# status       : "PoC"
+# status       : INCOMPLETE
 # ----------------------------------------------------------------------------
 
 """
+INCOMPLETE
+
 Script to execute the main function from src.utils.visualization module.
 
 This script imports and executes the main function from src.utils.visualization module,
