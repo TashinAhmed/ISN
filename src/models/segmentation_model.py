@@ -1,10 +1,10 @@
-#!/usr/bin/env python3  
-# -*- coding: utf-8 -*- 
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 # ----------------------------------------------------------------------------
 # Created By   : Tashin Ahmed
-# Created Date : "16/06/2024"
+# Created Date : "17/06/2024"
 # email        : tashinahmed.contact@gmail.com
-# copyright    : MIT License Copyright (c) 2024 Tashin Ahmed   
+# copyright    : MIT License Copyright (c) 2024 Tashin Ahmed
 # version      : "0.0.1"
 # status       : "PoC"
 # ----------------------------------------------------------------------------
@@ -21,6 +21,8 @@ import segmentation_models_pytorch as smp
 
 import torch
 from torch import nn
+
+from src.utils.metrics import compute_metrics, log_metrics_and_loss
 
 
 class SegmentationModel(pl.LightningModule):
@@ -40,6 +42,7 @@ class SegmentationModel(pl.LightningModule):
     - test_step(batch, batch_idx): Defines the test step.
     - configure_optimizers(): Configures the optimizer for training.
     """
+
     def __init__(self, net, loss, lr):
         super().__init__()
         self.save_hyperparameters()
@@ -70,19 +73,9 @@ class SegmentationModel(pl.LightningModule):
         Returns:
         - dict: Dictionary containing computed metrics.
         """
-        tp, fp, fn, tn = smp.metrics.get_stats(
-            preds, labels.long(), mode="binary", threshold=0.5
-        )
-        iou_score = smp.metrics.iou_score(tp, fp, fn, tn, reduction="micro")
-        f1_score = smp.metrics.f1_score(tp, fp, fn, tn, reduction="micro")
-        accuracy = smp.metrics.accuracy(tp, fp, fn, tn, reduction="macro")
-        recall = smp.metrics.recall(tp, fp, fn, tn, reduction="micro-imagewise")
-        return {
-            "iou_score": iou_score,
-            "f1_score": f1_score,
-            "accuracy": accuracy,
-            "recall": recall,
-        }
+
+        metrics_dict = compute_metrics(preds, labels)
+        return metrics_dict
 
     def training_step(self, batch, batch_idx):
         """
@@ -95,16 +88,8 @@ class SegmentationModel(pl.LightningModule):
         Returns:
         - torch.Tensor: Loss tensor for the batch.
         """
-        imgs, labels = batch
-        preds = self(imgs)
-        metrics = self.shared_step(preds, labels)
-        self.log("train_iou_score", metrics["iou_score"], on_epoch=True)
-        self.log("train_f1_score", metrics["f1_score"], on_epoch=True)
-        self.log("train_accuracy", metrics["accuracy"], on_epoch=True)
-        self.log("train_recall", metrics["recall"], on_epoch=True)
-        loss = self.loss(preds, labels)
-        self.log("train_loss", loss)
-        return loss
+
+        return log_metrics_and_loss(self, batch, "train")
 
     def validation_step(self, batch, batch_idx):
         """
@@ -114,15 +99,8 @@ class SegmentationModel(pl.LightningModule):
         - batch (tuple): Batch of input images and labels.
         - batch_idx (int): Index of the batch.
         """
-        imgs, labels = batch
-        preds = self(imgs)
-        metrics = self.shared_step(preds, labels)
-        self.log("valid_iou_score", metrics["iou_score"], on_epoch=True)
-        self.log("valid_f1_score", metrics["f1_score"], on_epoch=True)
-        self.log("valid_accuracy", metrics["accuracy"], on_epoch=True)
-        self.log("valid_recall", metrics["recall"], on_epoch=True)
-        loss = self.loss(preds, labels)
-        self.log("valid_loss", loss)
+        
+        log_metrics_and_loss(self, batch, "valid")
 
     def test_step(self, batch, batch_idx):
         """
@@ -132,15 +110,8 @@ class SegmentationModel(pl.LightningModule):
         - batch (tuple): Batch of input images and labels.
         - batch_idx (int): Index of the batch.
         """
-        imgs, labels = batch
-        preds = self(imgs)
-        metrics = self.shared_step(preds, labels)
-        self.log("test_iou_score", metrics["iou_score"], on_epoch=True)
-        self.log("test_f1_score", metrics["f1_score"], on_epoch=True)
-        self.log("test_accuracy", metrics["accuracy"], on_epoch=True)
-        self.log("test_recall", metrics["recall"], on_epoch=True)
-        loss = self.loss(preds, labels)
-        self.log("test_loss", loss)
+
+        log_metrics_and_loss(self, batch, "test")
 
     def configure_optimizers(self):
         """

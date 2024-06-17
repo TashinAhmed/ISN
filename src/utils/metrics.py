@@ -1,10 +1,10 @@
-#!/usr/bin/env python3  
-# -*- coding: utf-8 -*- 
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 # ----------------------------------------------------------------------------
 # Created By   : Tashin Ahmed
-# Created Date : "16/06/2024"
+# Created Date : "17/06/2024"
 # email        : tashinahmed.contact@gmail.com
-# copyright    : MIT License Copyright (c) 2024 Tashin Ahmed   
+# copyright    : MIT License Copyright (c) 2024 Tashin Ahmed
 # version      : "0.0.1"
 # status       : "PoC"
 # ----------------------------------------------------------------------------
@@ -63,6 +63,33 @@ def compute_metrics(preds, labels):
         "recall": smp.metrics.recall(tp, fp, fn, tn, reduction="micro-imagewise"),
     }
     return metrics
+
+
+def log_metrics_and_loss(model, batch, phase):
+    """
+    Log metrics and loss for a given phase (train, valid, test).
+
+    Args:
+    - model (SegmentationModel): Instance of the segmentation model.
+    - batch (tuple): Batch of input images and labels.
+    - phase (str): Phase of the model ('train', 'valid', or 'test').
+
+    Returns:
+    - torch.Tensor: Loss for the given batch.
+    """
+    imgs, labels = batch
+    preds = model(imgs)
+    metrics = model.shared_step(preds, labels)
+
+    model.log(f"{phase}_iou_score", metrics["iou_score"], on_epoch=True)
+    model.log(f"{phase}_f1_score", metrics["f1_score"], on_epoch=True)
+    model.log(f"{phase}_accuracy", metrics["accuracy"], on_epoch=True)
+    model.log(f"{phase}_recall", metrics["recall"], on_epoch=True)
+
+    loss = model.loss(preds, labels)
+    model.log(f"{phase}_loss", loss)
+
+    return loss
 
 
 def main():
