@@ -57,8 +57,8 @@
 
 ### CAN BE DONE
 
-1. in code - arg parser generation for the arguments [done]
-2. datasert_generator code is meant for running one time. it can be run multiple time as well but it will going to replace previous data. It's not handled to append instead of replace
+1. in code - arg parser generation for the arguments [half done]
+2. dataset_generator code is meant for running one time. it can be run multiple time as well but it will going to replace previous data. It's not handled to append instead of replace
 3. multiple callbacks can be used, used one for now.
 4. optuna for automated hyperparam optmization
 5. wandb to track the outcomes

@@ -1,10 +1,10 @@
-#!/usr/bin/env python3  
-# -*- coding: utf-8 -*- 
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 # ----------------------------------------------------------------------------
 # Created By   : Tashin Ahmed
 # Created Date : "16/06/2024"
 # email        : tashinahmed.contact@gmail.com
-# copyright    : MIT License Copyright (c) 2024 Tashin Ahmed   
+# copyright    : MIT License Copyright (c) 2024 Tashin Ahmed
 # version      : "0.0.1"
 # status       : "PoC"
 # ----------------------------------------------------------------------------
@@ -52,7 +52,9 @@ def split_data(df):
     Returns:
     - pd.DataFrame, pd.DataFrame, pd.DataFrame: Three DataFrames for training, validation, and test sets.
     """
-    valid_df = df.sample(frac=0.1, random_state=42)
+    valid_df = df.sample(
+        frac=0.1, random_state=42
+    )  # A bit nonsensed style of splitting should have used sklearn direclty
     remaining_df = df.drop(valid_df.index)
     test_df = remaining_df.sample(frac=0.1, random_state=42)
     train_df = remaining_df.drop(test_df.index)

@@ -4,7 +4,7 @@
 /data/raw
 /docs
 
-/working
+/working/savedckpt
 
 *.png
 *.ckpt

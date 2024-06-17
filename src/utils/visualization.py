@@ -6,7 +6,7 @@
 # email        : tashinahmed.contact@gmail.com
 # copyright    : MIT License Copyright (c) 2024 Tashin Ahmed   
 # version      : "0.0.1"
-# status       : "PoC"
+# status       : INCOMPLETE
 # ----------------------------------------------------------------------------
 
 """
