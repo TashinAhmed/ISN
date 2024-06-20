@@ -16,6 +16,10 @@ This script imports and executes the main function from src.training.train modul
 which is responsible for training the segmentation model and saving checkpoints.
 """
 
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from src.training.train import main
 
 if __name__ == "__main__":

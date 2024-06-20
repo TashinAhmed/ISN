@@ -18,6 +18,10 @@ This script imports and executes the main function from src.utils.visualization 
 which is responsible for visualizing the results of the segmentation model.
 """
 
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from src.utils.visualization import main
 
 if __name__ == "__main__":

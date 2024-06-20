@@ -16,6 +16,10 @@ This script imports and executes the main function from src.training.test module
 which is responsible for testing the segmentation model using the latest checkpoint.
 """
 
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from src.training.test import main
 
 if __name__ == "__main__":
