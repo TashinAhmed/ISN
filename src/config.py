@@ -28,9 +28,9 @@ DEVICE, NUM_DEVICES = (
 )
 WORKERS = mp.cpu_count()
 EPOCHS = 3
-OUTPUT_DIR = "../working"
-DATA_DIR = "../data/preprocessed"
-CHECKPOINT_DIR = '../working/savedckpt/'
+OUTPUT_DIR = "./working"
+DATA_DIR = "./data/preprocessed"
+CHECKPOINT_DIR = './working/savedckpt/'
 
 
 def main():

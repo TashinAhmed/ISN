@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # ----------------------------------------------------------------------------
 # Created By   : Tashin Ahmed
-# Created Date : "16/06/2024"
+# Created Date : "23/06/2024"
 # email        : tashinahmed.contact@gmail.com
 # copyright    : MIT License Copyright (c) 2024 Tashin Ahmed
 # version      : "0.0.1"
@@ -20,7 +20,7 @@ class names and RGB values.
 import os
 import pandas as pd
 
-from constants import DATA_DIR, CLASS_DICT_FILE
+from src.constants import DATA_DIR, CLASS_DICT_FILE
 
 
 def load_metadata(data_dir):
