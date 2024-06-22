@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*- 
 # ----------------------------------------------------------------------------
 # Created By   : Tashin Ahmed
-# Created Date : "16/06/2024"
+# Created Date : "23/06/2024"
 # email        : tashinahmed.contact@gmail.com
 # copyright    : MIT License Copyright (c) 2024 Tashin Ahmed   
 # version      : "0.0.1"
@@ -12,6 +12,7 @@
 import numpy as np
 from PIL import Image
 from torch.utils.data import Dataset
+import pandas as pd
 
 
 def one_hot_encode(label, label_values):
@@ -50,6 +51,17 @@ class ISNSet(Dataset):
     - class_rgb_values (list): List of RGB tuples for each class in the dataset.
     """
     def __init__(self, df, transform=None, preprocess_fn=None, class_rgb_values=None):
+
+        # Debug STARTS
+        # print("DEBUG - df type:", type(df))
+        # print("DEBUG - df content:\n", df)
+
+        # if df is None:
+        #     raise ValueError("The DataFrame 'df' is None. Please provide a valid DataFrame.")
+        # if "image_path" not in df.columns or "mask_path" not in df.columns:
+        #     raise ValueError("DataFrame must contain 'image_path' and 'mask_path' columns.")
+        # Debug ENDS
+
         self.image_paths = df["image_path"].tolist()
         self.mask_paths = df["mask_path"].tolist()
         self.transform = transform

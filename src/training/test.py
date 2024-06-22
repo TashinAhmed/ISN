@@ -1,10 +1,10 @@
-#!/usr/bin/env python3  
-# -*- coding: utf-8 -*- 
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 # ----------------------------------------------------------------------------
 # Created By   : Tashin Ahmed
-# Created Date : "16/06/2024"
+# Created Date : "23/06/2024"
 # email        : tashinahmed.contact@gmail.com
-# copyright    : MIT License Copyright (c) 2024 Tashin Ahmed   
+# copyright    : MIT License Copyright (c) 2024 Tashin Ahmed
 # version      : "0.0.1"
 # status       : "PoC"
 # ----------------------------------------------------------------------------
@@ -52,12 +52,12 @@ from src.models.segmentation_model import SegmentationModel
 from src.data.datamodule import ISNDataModule
 from src.data.data_preprocessing import load_metadata, split_data, load_class_info
 from src.config import *
-from src.utils.checkpoint_utils import get_latest_checkpoint
+from src.utils.checkpoint_utils import get_next_checkpoint_filename
 
 
 def test():
     metadata_df = load_metadata(DATA_DIR)
-    _, _, test_df = split_data(metadata_df)
+    FOO, BAR, test_df = split_data(metadata_df)
     class_names, class_rgb_values = load_class_info(DATA_DIR)
 
     net = create_unet_model()
@@ -66,8 +66,8 @@ def test():
         ENCODER, pretrained=ENCODER_WEIGHTS
     )
     isn_data = ISNDataModule(
-        train_df=None,
-        valid_df=None,
+        train_df=FOO,
+        valid_df=BAR,
         test_df=test_df,
         batch_size=BATCH_SIZE,
         img_size=IMG_SIZE,
@@ -76,7 +76,21 @@ def test():
     )
 
     # segmodel = SegmentationModel.load_from_checkpoint(checkpoint_path=checkpoint_path)
-    latest_checkpoint = get_latest_checkpoint(CHECKPOINT_DIR, "lightning_trained")
+
+    # latest_checkpoint = get_next_checkpoint_filename(CHECKPOINT_DIR, "lightning_trained")
+    # if latest_checkpoint:
+    #     checkpoint_path = os.path.join(CHECKPOINT_DIR, latest_checkpoint)
+    #     print(f"Loading checkpoint: {checkpoint_path}")
+    #     segmodel = SegmentationModel.load_from_checkpoint(
+    #         checkpoint_path=checkpoint_path
+    #     )
+    # else:
+    #     raise FileNotFoundError("No checkpoint file found.")
+
+    next_checkpoint, latest_checkpoint = get_next_checkpoint_filename(
+        CHECKPOINT_DIR, "lightning_trained"
+    )
+
     if latest_checkpoint:
         checkpoint_path = os.path.join(CHECKPOINT_DIR, latest_checkpoint)
         print(f"Loading checkpoint: {checkpoint_path}")
@@ -85,6 +99,15 @@ def test():
         )
     else:
         raise FileNotFoundError("No checkpoint file found.")
+
+    next_checkpoint_path = os.path.join(CHECKPOINT_DIR, next_checkpoint)
+    if os.path.exists(next_checkpoint_path):
+        print(f"Loading next checkpoint: {next_checkpoint_path}")
+        segmodel = SegmentationModel.load_from_checkpoint(
+            checkpoint_path=next_checkpoint_path
+        )
+    else:
+        print(f"Next checkpoint not found. Falling back to: {checkpoint_path}")
 
     trainer = pl.Trainer(accelerator=DEVICE, devices=NUM_DEVICES)
     trainer.test(segmodel, datamodule=isn_data)

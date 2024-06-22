@@ -116,13 +116,12 @@ Just another PoC on Image Segmentation Network on dummy dataset
 
 1. Run `python src/data_preparation/dataset_generator.py` from the parent directory. The script will generate data (images and masks) under the parent directory named as `data`. argparser also available. `python src/data_preparation/dataset_generator.py --img_height 256 --img_width 256 --min_shape_px 30 --max_shape_px 50 --num_images 100 --image_dir 'data/raw/images' --mask_dir 'data/raw/masks'`
 2. After that, run `python src/data_preparation/dataset_prepocessing.py` (argparse available for this script as well). This script will process raw data and create training ready data directories.
-3. Run python `src/data_preparation/metadata_generator.py` which will generate `metadata.csv`.
-4. `data/preprocessed/class_dict.csv` have to create manually for now according to the format.
+3. Run `python src/data_preparation/metadata_generator.py`  `which will generate `metadata.csv`.
+4. `data/preprocessed/class_dict.csv` have to create manually for now according to the format and it pushed at `main`.
 5. To train run `python scripts/run_training.py`
 6. To eval run `python scripts/run_evaluation.py`
 7. Alternatively run `./run_all.sh` from `scripts` directory. (`visualize_results.py` might throw some error at this point)
 8. To generate logs run `python scripts/run_{training/evaluation}.py > logs/train.log 2>&1`
-
 
 ### Branch Information
 

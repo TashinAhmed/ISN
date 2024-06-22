@@ -11,7 +11,7 @@
 
 import os
 
-DATA_DIR = "../data/preprocessed"
+DATA_DIR = "./data/preprocessed"
 CLASS_DICT_FILE = os.path.join(DATA_DIR, "class_dict.csv")
 
 
