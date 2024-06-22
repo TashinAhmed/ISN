@@ -56,7 +56,7 @@ from src.models.segmentation_model import SegmentationModel
 from src.data.datamodule import ISNDataModule
 from src.data.data_preprocessing import load_metadata, split_data, load_class_info
 from src.config import *
-from src.utils.checkpoint_utils import get_next_checkpoint_filename
+from src.utils.checkpoint_utils import get_next_checkpoint_filename_train
 
 
 def train():
@@ -73,7 +73,7 @@ def train():
     # checkpoint_callback = ModelCheckpoint(
     #     every_n_epochs=1, dirpath=OUTPUT_DIR, filename="lightning_trained"
     # )
-    checkpoint_filename = get_next_checkpoint_filename(CHECKPOINT_DIR, "lightning_trained")
+    checkpoint_filename = get_next_checkpoint_filename_train(CHECKPOINT_DIR, "lightning_trained")
     checkpoint_callback = ModelCheckpoint(
         dirpath=CHECKPOINT_DIR,
         filename=checkpoint_filename[:-5],  
