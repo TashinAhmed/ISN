@@ -114,7 +114,7 @@ Just another PoC on Image Segmentation Network on dummy dataset
 
 ### Instructions to Run
 
-<span style="color:red;">*A Jupyter [notebook]([url](https://github.com/TashinAhmed/ISN/blob/main/notebooks/ISN_train_eval_run.ipynb)) that followed steps 1-3, 5, 6 run sccessfully on colab free version.*</span>
+<span style="color:red;">*A Jupyter [notebook](https://github.com/TashinAhmed/ISN/blob/main/notebooks/ISN_train_eval_run.ipynb) that followed steps 1-3, 5, 6 run sccessfully on colab free version.*</span>
 
 1. Run `python src/data_preparation/dataset_generator.py` from the parent directory. The script will generate data (images and masks) under the parent directory named as `data`. argparser also available. `python src/data_preparation/dataset_generator.py --img_height 256 --img_width 256 --min_shape_px 30 --max_shape_px 50 --num_images 100 --image_dir 'data/raw/images' --mask_dir 'data/raw/masks'`
 2. After that, run `python src/data_preparation/dataset_prepocessing.py` (argparse available for this script as well). This script will process raw data and create training ready data directories.
